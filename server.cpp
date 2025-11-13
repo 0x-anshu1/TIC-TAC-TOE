@@ -64,18 +64,19 @@ int main(){
 	 board = ch_game_state(board,x,y,'X');
 	 screen_clear();
 	 print_board(board);
-	 while(true){
-		 memset(buffer,0,sizeof(buffer));
-		 buffer[0]='0'+x;
-		 buffer[1]='0'+y;
-		 GameResults g;
+	 memset(buffer,0,sizeof(buffer));
+	 buffer[0] = '0'+x;
+	 buffer[1] = '0'+y;
+	 GameResults g;
+	 ssize_t sen = send(clientsock,buffer,sizeof(buffer),0);
+	 if(sen<0){
+		 perror("send");
+		 close(clientsock);
+		 close(sersock);
+		 return 1;
+	 }
 
-		 ssize_t sen = send(clientsock,buffer,sizeof(buffer),0);
-		 if(sen<0){
-			 perror("send");
-			 break;
-		 }
-			
+	 while(true){	
 		 cout<<"P2(O)'s turn"<<endl;
 		 memset(buffer,0,sizeof(buffer));
 		 ssize_t rec = recv(clientsock,buffer,sizeof(buffer),0);
@@ -113,6 +114,14 @@ int main(){
 		 board=ch_game_state(board,x,y,'X');
 		 screen_clear();
 		 print_board(board);
+		 memset(buffer,0,sizeof(buffer));
+		 buffer[0] = '0'+x;
+		 buffer[1] = '0'+y;
+		 sen = send(clientsock,buffer,sizeof(buffer),0);
+		 if(sen<0){
+			 perror("send");
+			 break;
+		 }
 		 g=judge(board,'X');
 		 if(g==GameResults::WIN){
 			 cout<<"You Won!!!"<<endl;
