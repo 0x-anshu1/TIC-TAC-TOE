@@ -1,6 +1,10 @@
 #include<iostream>
 #include"game_fun.h"
 #include<array>
+#ifdef _WIN32
+	#include<windows.h>
+#endif
+#include<cstdlib>
 
 using namespace std;
 using matrix = array<array<char,3>,3>;
@@ -60,7 +64,16 @@ matrix ch_game_state(matrix& board, int x,int y,char sy){
 }
 
 bool avail(matrix& board,int x,int y){
+	if(x>2 || y>2) return false;
 	if(board[x][y]=='_') return true;
 	return false;
 }
 
+void screen_clear(){
+#ifdef _WIN32
+	int r = system("cls");
+#else
+	int r = system("clear");
+#endif
+	(void)r;
+}

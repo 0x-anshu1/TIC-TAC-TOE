@@ -33,6 +33,8 @@ int main(){
 	matrix board=init();
 	int x,y;
 	char buffer[1024];
+	print_board(board);
+	cout<<"P1(X)'s turn."<<endl;
 	while (true){
 		ssize_t r=recv(clientsock,buffer,sizeof(buffer),0);
 		if(r<0){
@@ -42,7 +44,7 @@ int main(){
 		x=buffer[0]-'0';
 		y=buffer[1]-'0';
 		board = ch_game_state(board,x,y,'X');
-		system("clear");
+		screen_clear();
 		print_board(board);
 		GameResults g;
 		g=judge(board,'X');
@@ -75,6 +77,7 @@ int main(){
 			perror("send");
 			break;
 		}
+		screen_clear();
 		print_board(board);
 		g=judge(board,'O');
 
@@ -87,6 +90,7 @@ int main(){
 			break;
 		}
 		memset(buffer,0,sizeof(buffer));
+		cout<<"P1(X)'s turn."<<endl;
 	}
 	close(clientsock);
 	return 0;

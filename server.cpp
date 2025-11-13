@@ -62,7 +62,7 @@ int main(){
 		 cin>>y;
 	 }
 	 board = ch_game_state(board,x,y,'X');
-	 system("clear");
+	 screen_clear();
 	 print_board(board);
 	 while(true){
 		 memset(buffer,0,sizeof(buffer));
@@ -75,7 +75,8 @@ int main(){
 			 perror("send");
 			 break;
 		 }
-
+			
+		 cout<<"P2(O)'s turn"<<endl;
 		 memset(buffer,0,sizeof(buffer));
 		 ssize_t rec = recv(clientsock,buffer,sizeof(buffer),0);
 		 if(rec<0){
@@ -86,7 +87,7 @@ int main(){
 		 x=buffer[0]-'0';
 		 y=buffer[1]-'0';
 		 board = ch_game_state(board,x,y,'O');
-		 system("clear");
+		 screen_clear();
 		 print_board(board);
 		 g = judge(board,'O');
 		 if(g==GameResults::WIN){
@@ -110,6 +111,7 @@ int main(){
 			 cin>>y;
 		 }
 		 board=ch_game_state(board,x,y,'X');
+		 screen_clear();
 		 print_board(board);
 		 g=judge(board,'X');
 		 if(g==GameResults::WIN){
