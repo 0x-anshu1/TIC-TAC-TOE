@@ -3,13 +3,13 @@
 A simple client–server Tic-Tac-Toe game built using TCP sockets in C++.  
 This project demonstrates basic socket programming, message passing, and turn-based game logic between two connected players.
 
-
+---
 
 ## Preview
 
 ![Tic Tac Toe Gameplay](assets/screenshot.png)
 
-
+---
 
 ## Features
 - Two-player client/server gameplay over TCP  
@@ -18,14 +18,14 @@ This project demonstrates basic socket programming, message passing, and turn-ba
 - Clean, minimal C++ codebase for learning networking fundamentals  
 - Cross-platform build support using CMake  
 
-
+---
 
 ## Requirements
 - Linux or WSL (Ubuntu/Debian recommended)  
 - CMake 3.10+  
 - g++ with C++17 support  
 
-
+---
 
 ## Build Instructions
 
@@ -38,7 +38,7 @@ cmake ..
 cmake --build .
 ```
 
-
+---
 
 ## Run Instructions
 
@@ -57,7 +57,7 @@ Terminal 2 (Client):
 
 Note: Both programs must run on the same machine, or on machines that can communicate over the configured port.
 
-
+---
 
 ## Project Structure
 
@@ -73,3 +73,4 @@ Note: Both programs must run on the same machine, or on machines that can commun
 └── assets/
     └── screenshot.png
 ```
+---
